@@ -1,0 +1,15 @@
+@EndUserText.label: 'Access Control for ZI_TRAIN00_BASIC_01'
+@MappingRole: true
+define role ZI_TRAIN00_BASIC_01 {
+  grant
+    select
+      on
+        ZI_TRAIN00_BASIC_01
+          where
+            ( bukrs ) = 
+              aspect pfcg_auth( 
+                F_BKPF_BUK,
+                BUKRS ,
+                ACTVT = '03');
+            
+}
