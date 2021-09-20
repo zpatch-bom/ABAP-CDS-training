@@ -1,2 +1,3 @@
 # cds-training
-Hi Guys, I'm Patsarun.
+
+- Basic Featues in ABAP CDS Views
