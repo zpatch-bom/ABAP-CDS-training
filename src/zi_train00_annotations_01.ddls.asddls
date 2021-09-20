@@ -24,7 +24,7 @@ define view ZI_Train00_Annotations_01
 
       @Semantics.unitOfMeasure: true
       MDOC.meins,
-      
+
       @Semantics.amount.currencyCode: 'waers'
       MDOC.dmbtr_stock,
 
@@ -35,7 +35,8 @@ define view ZI_Train00_Annotations_01
       MDOC.matnr,
       MDOC.bukrs,
       MDOC.budat,
-      MDOC.shkzg
+      MDOC.shkzg,
+      MDOC.bktxt      
 }
 where
       MDOC.record_type =       'MDOC'

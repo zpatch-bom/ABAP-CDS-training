@@ -1,0 +1,14 @@
+@EndUserText.label: 'DCL for ZI_TRAIN00_ADVANCED_03'
+@MappingRole: true
+define role ZI_TRAIN00_ADVANCED_03 {
+  grant 
+    select
+      on
+        ZI_TRAIN00_ADVANCED_03
+          where
+            (rbukrs) = aspect pfcg_auth(  F_BKPF_BUK, 
+                                          bukrs, 
+                                          actvt = '03');
+            
+}
+
