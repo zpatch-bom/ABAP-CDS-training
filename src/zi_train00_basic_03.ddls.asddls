@@ -17,7 +17,7 @@ define view ZI_Train00_Basic_03
                                                    and Address.nation     = 'T'
                                                    and Address.date_from  <= $session.system_date
                                                    and Address.date_to    >= $session.system_date
-                                                   and CC.spras           = '2'
+                                                   and CC.spras           = '2' // join only when CCode using Thai language
 
 {
   key CC.bukrs,

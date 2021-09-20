@@ -1,15 +1,14 @@
 /*---------------------------------------------------------------------*
-*& Data Definition: ZI_TRAIN00_MORE_02
+*& Data Definition: ZI_TRAIN00_MORE_03
 *&---------------------------------------------------------------------*
-*&  Arithmetic Expressions
-*&  Type Conversion
+*&  String
 *&--------------------------------------------------------------------*/
 
 @AbapCatalog.sqlViewName: 'ZITRAIN00MORE03'
 @AbapCatalog.compiler.compareFilter: true
 @AbapCatalog.preserveKey: true
 @AccessControl.authorizationCheck: #CHECK
-@EndUserText.label: 'Training - Arithmetic & CAST'
+@EndUserText.label: 'Training - String Functions'
 
 define view ZI_Train00_More_03
   as select from ZI_Train00_Annotations_01 as MDOC
@@ -50,13 +49,14 @@ define view ZI_Train00_More_03
       @EndUserText.label: 'REPLACE'
       replace( MDOC.matnr, '0', '.')                 as sreplace,
 
+      MDOC.bktxt,
+
+      @EndUserText.label: 'UPPER'
+      upper( MDOC.bktxt )                            as supper,
+
+      @EndUserText.label: 'LOWER'
+      lower( MDOC.bktxt )                            as slower,
+
       MDOC.bukrs,
       MDOC.budat
 }
-
-
-
-
-
-
-
