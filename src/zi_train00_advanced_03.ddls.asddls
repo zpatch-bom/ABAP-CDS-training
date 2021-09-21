@@ -10,6 +10,8 @@
 @AbapCatalog.preserveKey: true
 @AccessControl.authorizationCheck: #CHECK
 @EndUserText.label: 'Training - Consume Input Parameters'
+@AbapCatalog.viewEnhancementCategory: [#PROJECTION_LIST, #GROUP_BY]
+
 define view ZI_TRAIN00_ADVANCED_03
   with parameters
     i_key_date : abap.dats @<Environment.systemField: #SYSTEM_DATE,
@@ -21,17 +23,15 @@ define view ZI_TRAIN00_ADVANCED_03
                  i_koart: $parameters.i_koart ) as Acc
 {
   key Acc.rbukrs,
-      @EndUserText.label: 'Partner'
   key Acc.partner,
+  
       Acc.rhcur,
-      @EndUserText.label: 'Opening Amount'
-      sum (Acc.hsl )        as hsl,
-      @EndUserText.label: 'Overdue Amount'
+      sum( Acc.hsl )        as hsl,
       sum( Acc.overDue )    as overDue,
-      @EndUserText.label: 'Current due Amount'
       sum( Acc.currentDue ) as currentDue,
-      @EndUserText.label: 'Count'
-      count( * )            as nOfRecords
+      count( * )            as nOfRecords,
+
+      acc._Partner
 }
 group by
   Acc.rbukrs,

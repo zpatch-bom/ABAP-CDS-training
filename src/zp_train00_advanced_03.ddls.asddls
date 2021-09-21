@@ -20,21 +20,21 @@ define view ZP_TRAIN00_ADVANCED_03
 
     inner join   ZI_TRAIN00_ADVANCED_01(
                  i_days_1 : $parameters.i_days_1 ) as KeyDate on KeyDate.CalendarDate = $parameters.i_key_date
+
+  association to I_BusinessPartner as _Partner on _Partner.BusinessPartner = $projection.partner
 {
   key Acc.rbukrs,
   key Acc.gjahr,
   key Acc.belnr,
   key Acc.docln,
-      
+
       case $parameters.i_koart
         when 'D'
           then Acc.kunnr
-        when 'K'
-          then Acc.lifnr
-        else ''
-      end                 as partner,
+        else Acc.lifnr
+      end                    as partner,
       Acc.rhcur,
-      
+
       $parameters.i_key_date as keyDate,
       Acc.budat,
       Acc.netdt,
@@ -43,22 +43,24 @@ define view ZP_TRAIN00_ADVANCED_03
 
       @Semantics.amount.currencyCode: 'rhcur'
       Acc.hsl,
-      
+
       @Semantics.amount.currencyCode: 'rhcur'
       case
         when Acc.netdt > KeyDate.Date1
           then Acc.hsl
         else 0
-      end as overDue,
-      
+      end                    as overDue,
+
       @Semantics.amount.currencyCode: 'rhcur'
       case
         when Acc.netdt <= KeyDate.Date1
           then Acc.hsl
         else 0
-      end as currentDue,
+      end                    as currentDue,
 
-      $parameters.i_koart as koart
+      $parameters.i_koart    as koart,
+      
+      _Partner
 }
 where
        Acc.koart = $parameters.i_koart

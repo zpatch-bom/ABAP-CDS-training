@@ -22,7 +22,7 @@ START-OF-SELECTION.
 
 FORM alv_ida.
   TRY.
-      DATA(lo_alv) = cl_salv_gui_table_ida=>create_for_cds_view( 'ZI_TRAIN00_ADVANCED_03').
+      DATA(lo_alv) = cl_salv_gui_table_ida=>create_for_cds_view( 'ZC_TRAIN00_ADVANCED_03').
 
       lo_alv->set_view_parameters(
         it_parameters = VALUE #(
@@ -55,7 +55,9 @@ FORM alv_ida.
                   ( field_name = 'CURRENTDUE' function = if_salv_service_types=>cs_function_code-sum ) ) ).
       lo_layout->set_sort_order(
         VALUE #(
-          ( field_name = 'RBUKRS' is_grouped = abap_true ) ) ).
+          ( field_name = 'RBUKRS' is_grouped = abap_true )
+          ( field_name = 'PARTNER' )
+        ) ).
 
       lo_alv->fullscreen( )->display( ).
 
