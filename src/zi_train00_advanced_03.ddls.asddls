@@ -24,12 +24,13 @@ define view ZI_TRAIN00_ADVANCED_03
 {
   key Acc.rbukrs,
   key Acc.partner,
-  
+
       Acc.rhcur,
       sum( Acc.hsl )        as hsl,
       sum( Acc.overDue )    as overDue,
       sum( Acc.currentDue ) as currentDue,
-      count( * )            as nOfRecords,
+      min( Acc.budat )      as firstPostingDate,
+      max( Acc.augdt )      as lastClearingDate,
 
       acc._Partner
 }

@@ -40,6 +40,6 @@ define view ZC_TRAIN00_ADVANCED_03
       @EndUserText.label: 'Current due Amount'
       currentDue,
 
-      @EndUserText.label: 'Count'
-      nOfRecords
+      firstPostingDate,
+      lastClearingDate
 }

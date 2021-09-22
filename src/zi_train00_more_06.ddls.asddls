@@ -10,6 +10,9 @@
 @AccessControl.authorizationCheck: #CHECK
 @EndUserText.label: 'Training - Aggregations (Basic-ACDOCA)'
 
+@Analytics.dataCategory: #FACT
+@VDM.viewType: #BASIC
+
 define view ZI_TRAIN00_MORE_06
   as select from acdoca as Acc
 {

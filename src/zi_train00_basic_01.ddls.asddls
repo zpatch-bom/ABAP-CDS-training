@@ -36,10 +36,15 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'Training - Simple ABAP CDS View'
 
+@VDM.viewType: #BASIC
+@Analytics.dataCategory: #DIMENSION
+
 define view ZI_Train00_Basic_01 //CDS Entity
   as select from t001 as CC
 {
+      @ObjectModel.text.element: ['butxt']
   key CC.bukrs,
+      @Semantics.text: true
       CC.butxt,
       CC.ort01,
       CC.land1,
