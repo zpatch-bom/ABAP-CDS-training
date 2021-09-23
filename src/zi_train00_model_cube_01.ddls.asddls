@@ -26,33 +26,49 @@ define view ZI_TRAIN00_MODEL_CUBE_01
   key Acc.rbukrs,
   key Acc.partner,
 
+      //      Acc.CompanyName,
+
       @Aggregation.default: #SUM
       @Semantics.amount.currencyCode: 'rhcur'
       cast(
         sum( Acc.openingAmount )
-        as ztrain_de_openning preserving type )     as openingAmount,
+        as ztrain_de_openning preserving type )               as openingAmount,
 
       @Aggregation.default: #SUM
       @Semantics.amount.currencyCode: 'rhcur'
       cast(
         sum( Acc.overDue )
-          as ztrain_de_overdue preserving type )    as overDue,
+          as ztrain_de_overdue preserving type )              as overDue,
 
       @Aggregation.default: #SUM
       cast(
         sum( Acc.currentDue )
-          as ztrain_de_currentdue preserving type ) as currentDue,
+          as ztrain_de_currentdue preserving type )           as currentDue,
 
-      @Aggregation.default: #NONE
+      @Aggregation.default: #SUM
       cast(
-        count( * ) as sydbcnt preserving type )     as nOfRecords,
+        count( * ) as ztrain_de_nofrecords preserving type  ) as nOfRecords,
+
+//    For the Percentage, we cannot do like this. % cannot SUM
+//      cast(
+//        sum(
+//          case
+//            when Acc.openingAmount <> 0
+//              then division(
+//                    Acc.overDue * 100,
+//                    Acc.openingAmount,
+//                    4)
+//              else 0
+//          end ) as abap.dec( 23, 4 ) )                        as percentageOverdue,
 
       Acc.rhcur,
 
+      // Associations
       acc._Partner,
       acc._Company
 }
 group by
+//  Acc.CompanyName,
   Acc.rbukrs,
   Acc.partner,
   Acc.rhcur
