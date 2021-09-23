@@ -24,12 +24,16 @@ define view ZP_TRAIN00_MODEL_CUBE_01
                  i_days_1 : $parameters.i_days_1 ) as KeyDate on KeyDate.CalendarDate = $parameters.i_key_date
 
   association to I_BusinessPartner   as _Partner on _Partner.BusinessPartner = $projection.partner
+
   association to ZI_Train00_Basic_01 as _Company on _Company.bukrs = $projection.rbukrs
 {
       @ObjectModel.foreignKey.association: '_Company'
   key Acc.rbukrs,
+  
   key Acc.gjahr,
+  
   key Acc.belnr,
+  
   key Acc.docln,
 
       @ObjectModel.foreignKey.association: '_Partner'
@@ -72,7 +76,11 @@ define view ZP_TRAIN00_MODEL_CUBE_01
       Acc.augdt,
       KeyDate.Date1,
       $parameters.i_koart                             as koart,
-
+      
+//      _Company.butxt as CompanyName,
+      
+      
+      // Associations
       _Partner,
       _Company
 }
