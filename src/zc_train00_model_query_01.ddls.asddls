@@ -15,8 +15,12 @@
 
 define view ZC_TRAIN00_MODEL_Query_01
   with parameters
-    i_key_date : keyda @<Environment.systemField: #SYSTEM_DATE,
+//    @Environment.systemField: #SYSTEM_DATE
+    @Consumption.defaultValue: '20210331'
+    i_key_date : keyda,
+    @Consumption.defaultValue: '30'
     i_days_1   : agedays,
+    @Consumption.defaultValue: 'D'
     i_koart    : koart
   as select from ZI_TRAIN00_MODEL_CUBE_01(
                    i_key_date: $parameters.i_key_date,
@@ -32,12 +36,16 @@ define view ZC_TRAIN00_MODEL_Query_01
       }
       @AnalyticsDetails.query.axis: #COLUMNS
       @AnalyticsDetails.query.display: #KEY_TEXT
+      @AnalyticsDetails.query.totals: #SHOW
   key rbukrs,
 
       @AnalyticsDetails.query.axis: #ROWS
-      @AnalyticsDetails.query.display: #KEY_TEXT
-//      @ObjectModel.foreignKey.association: '_Partner'
+//      @AnalyticsDetails.query.display: #KEY_TEXT
+      @AnalyticsDetails.query.display: #KEY
   key partner,
+
+      //      @AnalyticsDetails.query.axis: #FREE
+      //      CompanyName, // Do not add text field like this, use foreign key association instead
 
       @AnalyticsDetails.query.axis: #FREE
       rhcur,
@@ -49,9 +57,12 @@ define view ZC_TRAIN00_MODEL_Query_01
       overDue,
 
       @AnalyticsDetails.query.axis: #COLUMNS
-      currentDue
+      currentDue,
+
+      @EndUserText.label: '%Overdue'
+      @AnalyticsDetails.query.axis: #COLUMNS
+      @AnalyticsDetails.query.formula: 'NDIV0( overDue * 100 / openingAmount)'
+      cast( 0 as abap.dec( 23, 4 ) ) as percentOverdue
       
-//      _Partner
+
 }
-
-
