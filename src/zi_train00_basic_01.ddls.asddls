@@ -44,8 +44,10 @@ define view ZI_Train00_Basic_01 //CDS Entity
 {
       @ObjectModel.text.element: ['butxt']
   key CC.bukrs,
+  
       @Semantics.text: true
       CC.butxt,
+  
       CC.ort01,
       CC.land1,
       CC.waers,

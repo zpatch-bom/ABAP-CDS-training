@@ -62,7 +62,12 @@ define view ZC_TRAIN00_MODEL_Query_01
       @EndUserText.label: '%Overdue'
       @AnalyticsDetails.query.axis: #COLUMNS
       @AnalyticsDetails.query.formula: 'NDIV0( overDue * 100 / openingAmount)'
-      cast( 0 as abap.dec( 23, 4 ) ) as percentOverdue
+      cast( 0 as abap.dec( 23, 4 ) ) as percentOverdue,
+      
+      @EndUserText.label: '%Overall'
+      @AnalyticsDetails.query.axis: #COLUMNS
+      @AnalyticsDetails.query.formula: 'NDIV0( overDue * 100 / SUMRT( openingAmount ) )'
+      cast( 0 as abap.dec( 23, 2 ) ) as sumgt
       
 
 }
