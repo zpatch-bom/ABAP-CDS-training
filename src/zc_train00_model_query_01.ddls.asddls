@@ -12,14 +12,18 @@
 
 @Analytics.query: true
 @VDM.viewType: #CONSUMPTION
+//@OData.publish: true
 
 define view ZC_TRAIN00_MODEL_Query_01
   with parameters
 //    @Environment.systemField: #SYSTEM_DATE
-    @Consumption.defaultValue: '20210331'
+            @Consumption.defaultValue: '20210331'
+    //    @Consumption.defaultValue: 'TODAY'
     i_key_date : keyda,
+
     @Consumption.defaultValue: '30'
     i_days_1   : agedays,
+
     @Consumption.defaultValue: 'D'
     i_koart    : koart
   as select from ZI_TRAIN00_MODEL_CUBE_01(
@@ -28,20 +32,21 @@ define view ZC_TRAIN00_MODEL_Query_01
                    i_koart: $parameters.i_koart )
 {
       @Consumption.filter: {
-        mandatory: true,
+      //        mandatory: true,
         defaultValue: '0001',
-        defaultValueHigh: '0003',
-        selectionType: #INTERVAL,
+        defaultValueHigh: '0004',
+        selectionType: #RANGE,
         multipleSelections: true
       }
       @AnalyticsDetails.query.axis: #COLUMNS
       @AnalyticsDetails.query.display: #KEY_TEXT
       @AnalyticsDetails.query.totals: #SHOW
+      @UI.lineItem: [{ position: 10 }]
   key rbukrs,
 
       @AnalyticsDetails.query.axis: #ROWS
-//      @AnalyticsDetails.query.display: #KEY_TEXT
-      @AnalyticsDetails.query.display: #KEY
+      @AnalyticsDetails.query.display: #KEY_TEXT
+      @UI.lineItem: [{ position: 20 }]
   key partner,
 
       //      @AnalyticsDetails.query.axis: #FREE
@@ -62,12 +67,7 @@ define view ZC_TRAIN00_MODEL_Query_01
       @EndUserText.label: '%Overdue'
       @AnalyticsDetails.query.axis: #COLUMNS
       @AnalyticsDetails.query.formula: 'NDIV0( overDue * 100 / openingAmount)'
-      cast( 0 as abap.dec( 23, 4 ) ) as percentOverdue,
-      
-      @EndUserText.label: '%Overall'
-      @AnalyticsDetails.query.axis: #COLUMNS
-      @AnalyticsDetails.query.formula: 'NDIV0( overDue * 100 / SUMRT( openingAmount ) )'
-      cast( 0 as abap.dec( 23, 2 ) ) as sumgt
-      
+      cast( 0 as abap.dec( 23, 4 ) ) as percentOverdue
+
 
 }

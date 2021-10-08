@@ -4,6 +4,7 @@
   <asx:values>
    <DEVC>
     <CTEXT>Training ABAP CDS Views (trainer package)</CTEXT>
+    <RESTRICTED>X</RESTRICTED>
    </DEVC>
   </asx:values>
  </asx:abap>

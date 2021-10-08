@@ -22,7 +22,8 @@ START-OF-SELECTION.
 
 FORM alv_ida.
   TRY.
-      DATA(lo_alv) = cl_salv_gui_table_ida=>create_for_cds_view( 'ZC_TRAIN00_ADVANCED_03').
+*      DATA(lo_alv) = cl_salv_gui_table_ida=>create_for_cds_view( 'ZC_TRAIN00_ADVANCED_03').
+      DATA(lo_alv) = cl_salv_gui_table_ida=>create_for_cds_view( 'ZC_TRAIN00_MODEL_Query_01').
 
       lo_alv->set_view_parameters(
         it_parameters = VALUE #(
@@ -50,9 +51,10 @@ FORM alv_ida.
 
       DATA(lo_layout) = lo_alv->default_layout( ).
       lo_layout->set_aggregations(
-        VALUE #(  ( field_name = 'HSL       ' function = if_salv_service_types=>cs_function_code-sum )
-                  ( field_name = 'OVERDUE   ' function = if_salv_service_types=>cs_function_code-sum )
-                  ( field_name = 'CURRENTDUE' function = if_salv_service_types=>cs_function_code-sum ) ) ).
+*        VALUE #(  ( field_name = 'HSL       '    function = if_salv_service_types=>cs_function_code-sum )
+        VALUE #(  ( field_name = 'OPENINGAMOUNT'  function = if_salv_service_types=>cs_function_code-sum )
+                  ( field_name = 'OVERDUE   '     function = if_salv_service_types=>cs_function_code-sum )
+                  ( field_name = 'CURRENTDUE'     function = if_salv_service_types=>cs_function_code-sum ) ) ).
       lo_layout->set_sort_order(
         VALUE #(
           ( field_name = 'RBUKRS' is_grouped = abap_true )
@@ -61,7 +63,7 @@ FORM alv_ida.
 
       lo_alv->fullscreen( )->display( ).
 
-    CATCH cx_salv_error INTO DATA(lx_error).
+    CATCH cx_salv_ida_dynamic INTO DATA(lx_error).
       MESSAGE lx_error TYPE 'S' DISPLAY LIKE 'E'.
   ENDTRY.
 ENDFORM.

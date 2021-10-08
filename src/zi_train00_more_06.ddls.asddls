@@ -41,7 +41,6 @@ where
        Acc.kunnr  like '0002%'
     or Acc.lifnr  like '0002%'
   )
-//  and  Acc.rbukrs =    '0001'
   and(
        Acc.koart  =    'D'
     or Acc.koart  =    'K'

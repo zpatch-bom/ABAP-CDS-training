@@ -18,7 +18,7 @@ define view ZI_TRAIN00_MORE_05
   key MDOC.zeile,
 
       MDOC.budat,
-
+      
       dats_is_valid(
         cast(
           concat(

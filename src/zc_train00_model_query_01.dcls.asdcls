@@ -1,0 +1,12 @@
+@EndUserText.label: 'DCL for ZC_TRAIN00_MODEL_QUERY_01'
+@MappingRole: true
+define role ZC_TRAIN00_MODEL_QUERY_01 {
+  grant 
+    select
+      on
+        ZC_TRAIN00_MODEL_QUERY_01
+          where
+            (rbukrs) = aspect pfcg_auth(  F_BKPF_BUK, 
+                                          bukrs, 
+                                          actvt = '03');
+}

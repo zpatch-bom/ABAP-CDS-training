@@ -25,6 +25,6 @@ define view ZI_Train00_Basic_05
       1           as fixed_int1,
       -9          as fixed_int2,
       0.7         as fixed_dec1,
-      #koart.D    as koart,
+      #koart.'D'  as koart,
       #land1.'TH' as land1
 }

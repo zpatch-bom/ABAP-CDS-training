@@ -18,11 +18,11 @@ START-OF-SELECTION.
 
   TRY.
 
-*      DATA(go_alv) = cl_salv_gui_table_ida=>create_for_cds_view( 'ZI_Train00_Annotations_01').
+      DATA(go_alv) = cl_salv_gui_table_ida=>create_for_cds_view( 'ZI_Train00_Annotations_01').
 *      DATA(go_alv) = cl_salv_gui_table_ida=>create_for_cds_view( 'ZI_Train00_More_01').
 *      DATA(go_alv) = cl_salv_gui_table_ida=>create_for_cds_view( 'ZI_Train00_More_02').
 *      DATA(go_alv) = cl_salv_gui_table_ida=>create_for_cds_view( 'ZI_Train00_More_03').
-      DATA(go_alv) = cl_salv_gui_table_ida=>create_for_cds_view( 'ZI_Train00_More_04').
+*      DATA(go_alv) = cl_salv_gui_table_ida=>create_for_cds_view( 'ZI_Train00_More_04').
 
       DATA(go_range) = NEW cl_salv_range_tab_collector( ).
       go_range->add_ranges_for_name( iv_name = 'MATNR' it_ranges = s_matnr[] ).
